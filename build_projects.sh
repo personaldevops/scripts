@@ -1,17 +1,25 @@
 c#!/usr/bin/env bash
-SCRIPTDIR=$(dirname "$0")
-BASEDIR=$(cd "$SCRIPTDIR" && pwd)
-HOMEDIR=${BASEDIR}/..
-cd "${HOMEDIR}/abstraction"
-pip3 install -r requirements.txt .
-cd ..
-cd "${HOMEDIR}/api_servicecore"
-pip3 install -r requirements.txt .
-cd ..
-cd "${HOMEDIR}/appservice"
-pip3 install -r requirements.txt .
-cd ..
-cd "${HOMEDIR}/authservice"
-pip3 install -r requirements.txt .
+cd $CODEBASE_DIR
+repos=$(ls -d */)
+repos=(${repos//" "/ })
+exclude=("notebooks"
+"configs"
+"scripts")
+for i in "${!repos[@]}"
+do
+  for j in "${exclude[@]}"
+  do
+    if [[ ${repos[i]::-1} == $j ]]
+    then
+      unset 'repos[i]'
+    fi
+  done
+done
+for i in "${repos[@]}"
+do
+  echo "----------------------BUILDING $i--------------------------"
+  cd $CODEBASE_DIR/$i
+  pip3 install -r requirements.txt .
+done
 python -m pip install autopep8
 
