@@ -1,4 +1,3 @@
-c#!/usr/bin/env bash
 cd $CODEBASE_DIR
 repos=$(ls -d */)
 repos=(${repos//" "/ })
