@@ -1,4 +1,6 @@
-git clone git@github.com:personaldevops/configs.gitS
+cd $CODEBASE_DIR
+
+git clone git@github.com:personaldevops/configs.git
 
 git clone git@github.com:personaldevops/abstraction.git
 
